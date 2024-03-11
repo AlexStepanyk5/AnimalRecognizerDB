@@ -7,10 +7,8 @@ namespace AnimalRecognizer.Data
 
     public class AnimalRecognizerDBContext : DbContext
     {
-        //public AnimalRecognizerDBContext() { }
         public AnimalRecognizerDBContext(DbContextOptions<AnimalRecognizerDBContext> options) : base(options)
         {
-            //Database.EnsureCreated();
         }
 
         public DbSet<Pet> Pets { get; set; }
@@ -43,16 +41,13 @@ namespace AnimalRecognizer.Data
                 .HasMaxLength(150)
                 .IsUnicode(false);
 
-                entity.Property(p => p.Breed)
-                .HasColumnType("varchar")
-                .HasMaxLength(150)
-                .IsUnicode(false);
-
                 entity.Property(p => p.Sterilized)
-                .HasColumnType("bit");
+                .HasColumnType("bit")
+                .IsRequired();
 
                 entity.Property(p => p.Passport)
-                .HasColumnType("bit");
+                .HasColumnType("bit")
+                .IsRequired();
 
                 entity.HasOne(p => p.Image)
                 .WithOne()
@@ -103,11 +98,6 @@ namespace AnimalRecognizer.Data
                .HasColumnType("varchar")
                .HasMaxLength(150)
                .IsUnicode(false);
-
-                entity.HasOne(p => p.Pet)
-                .WithOne(i => i.Image)
-                .HasForeignKey<Pet>(p => p.ImageId);
-
 
             });
 

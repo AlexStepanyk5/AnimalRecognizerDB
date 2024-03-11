@@ -13,7 +13,6 @@ namespace AnimalRecognizer.DTOs
         public string Name { get; set; }
         public string Colour { get; set; }
         public PetType Type { get; set; }
-        public string Breed { get; set; }
         public bool Sterilized { get; set; }
         public bool Passport { get; set; }
         public ImageDTO Image { get; set; }

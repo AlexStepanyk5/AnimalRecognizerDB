@@ -116,6 +116,89 @@ namespace AnimalRecognizer.Controllers
 
         }
 
+
+        [HttpGet("{type}/{sterilized}/{passport}")]
+        public async Task<ActionResult<IEnumerable<Pet>>> GetPetByTypeAndOther(string type, bool sterilized, bool passport)
+        {
+            if (_context.Pets == null)
+            {
+                return NotFound();
+            }
+
+            if (type == "Cat")
+            {
+                var pets = _context.Pets.AsQueryable();
+
+                pets = pets.Where(p => p.Type == Pet.PetType.Cat && p.Sterilized == sterilized && p.Passport == passport);
+
+                await pets.Include(p => p.Image)
+                                 .Include(p => p.CurrentShelter)
+                                 .ToListAsync();
+
+                var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
+
+                return Ok(mappedPets);
+            }
+            else if (type == "Dog")
+            {
+                var pets = _context.Pets.AsQueryable();
+
+                pets = pets.Where(p => p.Type == Pet.PetType.Dog && p.Sterilized == sterilized && p.Passport == passport);
+
+                await pets.Include(p => p.Image)
+                                 .Include(p => p.CurrentShelter)
+                                 .ToListAsync();
+
+                var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
+
+                return Ok(mappedPets);
+            }
+
+            return NotFound();
+
+        }
+
+        [HttpGet("{type}/{colour}/{sterilized}/{passport}")]
+        public async Task<ActionResult<IEnumerable<Pet>>> GetPetByTypeColourOther(string type, string colour, bool sterilized, bool passport)
+        {
+            if (_context.Pets == null)
+            {
+                return NotFound();
+            }
+
+            if (type == "Cat")
+            {
+                var pets = _context.Pets.AsQueryable();
+
+                pets = pets.Where(p => p.Type == Pet.PetType.Cat && p.Colour == colour && p.Sterilized == sterilized && p.Passport == passport);
+
+                await pets.Include(p => p.Image)
+                                 .Include(p => p.CurrentShelter)
+                                 .ToListAsync();
+
+                var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
+
+                return Ok(mappedPets);
+            }
+            else if (type == "Dog")
+            {
+                var pets = _context.Pets.AsQueryable();
+
+                pets = pets.Where(p => p.Type == Pet.PetType.Dog && p.Colour == colour && p.Sterilized == sterilized && p.Passport == passport);
+
+                await pets.Include(p => p.Image)
+                                 .Include(p => p.CurrentShelter)
+                                 .ToListAsync();
+
+                var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
+
+                return Ok(mappedPets);
+            }
+
+            return NotFound();
+
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPet(int id, Pet pet)
         {

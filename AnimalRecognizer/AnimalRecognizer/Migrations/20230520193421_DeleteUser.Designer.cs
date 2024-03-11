@@ -57,12 +57,6 @@ namespace AnimalRecognizer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Breed")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar");
-
                     b.Property<string>("Colour")
                         .IsRequired()
                         .HasMaxLength(150)
