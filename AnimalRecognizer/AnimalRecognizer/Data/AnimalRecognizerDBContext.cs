@@ -53,9 +53,8 @@ namespace AnimalRecognizer.Data
                 .WithOne()
                 .IsRequired();
 
-                entity.HasOne(p => p.CurrentContact)
-                .WithMany(p => p.Pets)
-                .HasForeignKey(p => p.CurrentContactId)
+                entity.HasOne(p => p.Contact)
+                .WithOne()
                 .IsRequired();
 
             });

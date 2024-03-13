@@ -29,7 +29,7 @@ namespace AnimalRecognizer.Controllers
         public async Task<ActionResult<List<Pet>>> GetPets()
         {
             var pets = await _context.Pets.Include(p => p.Image)
-                                          .Include(p => p.CurrentContact)
+                                          .Include(p => p.Contact)
                                           .ToListAsync();
 
             var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
@@ -50,7 +50,7 @@ namespace AnimalRecognizer.Controllers
                 pets = pets.Where(p => p.Type == Pet.PetType.Cat);
                 
                 await pets.Include(p => p.Image)
-                                 .Include(p => p.CurrentContact)
+                                 .Include(p => p.Contact)
                                  .ToListAsync();
 
                 var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
@@ -61,7 +61,7 @@ namespace AnimalRecognizer.Controllers
             {
                 pets = pets.Where(p => p.Type == Pet.PetType.Dog);
                 await pets.Include(p => p.Image)
-                                  .Include(p => p.CurrentContact)
+                                  .Include(p => p.Contact)
                                   .ToListAsync();
 
                 var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
@@ -90,7 +90,7 @@ namespace AnimalRecognizer.Controllers
                 pets = pets.Where(p => p.Type == Pet.PetType.Cat && p.Colour == colour);
 
                 await pets.Include(p => p.Image)
-                                 .Include(p => p.CurrentContact)
+                                 .Include(p => p.Contact)
                                  .ToListAsync();
 
                 var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
@@ -104,7 +104,7 @@ namespace AnimalRecognizer.Controllers
                 pets = pets.Where(p => p.Type == Pet.PetType.Dog && p.Colour == colour);
 
                 await pets.Include(p => p.Image)
-                                 .Include(p => p.CurrentContact)
+                                 .Include(p => p.Contact)
                                  .ToListAsync();
 
                 var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
@@ -132,7 +132,7 @@ namespace AnimalRecognizer.Controllers
                 pets = pets.Where(p => p.Type == Pet.PetType.Cat && p.Sterilized == sterilized && p.Passport == passport);
 
                 await pets.Include(p => p.Image)
-                                 .Include(p => p.CurrentContact)
+                                 .Include(p => p.Contact)
                                  .ToListAsync();
 
                 var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
@@ -146,7 +146,7 @@ namespace AnimalRecognizer.Controllers
                 pets = pets.Where(p => p.Type == Pet.PetType.Dog && p.Sterilized == sterilized && p.Passport == passport);
 
                 await pets.Include(p => p.Image)
-                                 .Include(p => p.CurrentContact)
+                                 .Include(p => p.Contact)
                                  .ToListAsync();
 
                 var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
@@ -173,7 +173,7 @@ namespace AnimalRecognizer.Controllers
                 pets = pets.Where(p => p.Type == Pet.PetType.Cat && p.Colour == colour && p.Sterilized == sterilized && p.Passport == passport);
 
                 await pets.Include(p => p.Image)
-                                 .Include(p => p.CurrentContact)
+                                 .Include(p => p.Contact)
                                  .ToListAsync();
 
                 var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
@@ -187,7 +187,7 @@ namespace AnimalRecognizer.Controllers
                 pets = pets.Where(p => p.Type == Pet.PetType.Dog && p.Colour == colour && p.Sterilized == sterilized && p.Passport == passport);
 
                 await pets.Include(p => p.Image)
-                                 .Include(p => p.CurrentContact)
+                                 .Include(p => p.Contact)
                                  .ToListAsync();
 
                 var mappedPets = pets.Select(pet => _mapper.Map<PetDTO>(pet));
@@ -238,7 +238,8 @@ namespace AnimalRecognizer.Controllers
             _context.Pets.Add(pet);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPet", new { id = pet.Id }, pet);
+            return CreatedAtAction(nameof(GetPets), new { id = pet.Id }, pet);
+
         }
 
         [HttpDelete("{id}")]

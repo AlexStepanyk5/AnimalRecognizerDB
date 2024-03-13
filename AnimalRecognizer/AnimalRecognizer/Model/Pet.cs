@@ -15,8 +15,8 @@
         public bool Passport { get; set; }
         public int ImageId { get; set; }
         public Image Image { get; set; }
-        public int CurrentContactId { get; set; }
-        public Contact CurrentContact { get; set; }
+        public int ContactId { get; set; }
+        public Contact Contact { get; set; }
 
     }
 }
