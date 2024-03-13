@@ -12,55 +12,55 @@ namespace AnimalRecognizer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SheltersController : ControllerBase
+    public class ContactsController : ControllerBase
     {
         private readonly AnimalRecognizerDBContext _context;
 
-        public SheltersController(AnimalRecognizerDBContext context)
+        public ContactsController(AnimalRecognizerDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Shelters
+        // GET: api/Contacts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Shelter>>> GetShelters()
+        public async Task<ActionResult<IEnumerable<Contact>>> GetContacts()
         {
-            if (_context.Shelters == null)
+            if (_context.Contacts == null)
             {
                 return NotFound();
             }
-            return await _context.Shelters.ToListAsync();
+            return await _context.Contacts.ToListAsync();
         }
 
-        // GET: api/Shelters/5
+        // GET: api/Contacts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Shelter>> GetShelter(int id)
+        public async Task<ActionResult<Contact>> GetContact(int id)
         {
-            if (_context.Shelters == null)
+            if (_context.Contacts == null)
             {
                 return NotFound();
             }
-            var shelter = await _context.Shelters.FindAsync(id);
+            var contact = await _context.Contacts.FindAsync(id);
 
-            if (shelter == null)
+            if (contact == null)
             {
                 return NotFound();
             }
 
-            return shelter;
+            return contact;
         }
 
-        // PUT: api/Shelters/5
+        // PUT: api/Contacts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutShelter(int id, Shelter shelter)
+        public async Task<IActionResult> PutContact(int id, Contact contact)
         {
-            if (id != shelter.Id)
+            if (id != contact.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(shelter).State = EntityState.Modified;
+            _context.Entry(contact).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace AnimalRecognizer.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ShelterExists(id))
+                if (!ContactExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +81,44 @@ namespace AnimalRecognizer.Controllers
             return NoContent();
         }
 
-        // POST: api/Shelters
+        // POST: api/Contacts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Shelter>> PostShelter(Shelter shelter)
+        public async Task<ActionResult<Contact>> PostContact(Contact contact)
         {
-            if (_context.Shelters == null)
+            if (_context.Contacts == null)
             {
-                return Problem("Entity set 'AnimalRecognizerDBContext.Shelters'  is null.");
+                return Problem("Entity set 'AnimalRecognizerDBContext.Contacts'  is null.");
             }
-            _context.Shelters.Add(shelter);
+            _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetShelter", new { id = shelter.Id }, shelter);
+            return CreatedAtAction("GetContact", new { id = contact.Id }, contact);
         }
 
-        // DELETE: api/Shelters/5
+        // DELETE: api/Contacts/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteShelter(int id)
+        public async Task<IActionResult> DeleteContact(int id)
         {
-            if (_context.Shelters == null)
+            if (_context.Contacts == null)
             {
                 return NotFound();
             }
-            var shelter = await _context.Shelters.FindAsync(id);
-            if (shelter == null)
+            var contact = await _context.Contacts.FindAsync(id);
+            if (contact == null)
             {
                 return NotFound();
             }
 
-            _context.Shelters.Remove(shelter);
+            _context.Contacts.Remove(contact);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ShelterExists(int id)
+        private bool ContactExists(int id)
         {
-            return (_context.Shelters?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Contacts?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

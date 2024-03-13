@@ -63,7 +63,7 @@ namespace AnimalRecognizer.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar");
 
-                    b.Property<int>("CurrentShelterId")
+                    b.Property<int>("CurrentContactId")
                         .HasColumnType("int");
 
                     b.Property<int>("ImageId")
@@ -89,7 +89,7 @@ namespace AnimalRecognizer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CurrentShelterId");
+                    b.HasIndex("CurrentContactId");
 
                     b.HasIndex("ImageId")
                         .IsUnique();
@@ -97,7 +97,7 @@ namespace AnimalRecognizer.Migrations
                     b.ToTable("Pets");
                 });
 
-            modelBuilder.Entity("AnimalRecognizer.Model.Shelter", b =>
+            modelBuilder.Entity("AnimalRecognizer.Model.Contact", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,14 +129,14 @@ namespace AnimalRecognizer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shelters");
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("AnimalRecognizer.Model.Pet", b =>
                 {
-                    b.HasOne("AnimalRecognizer.Model.Shelter", "CurrentShelter")
+                    b.HasOne("AnimalRecognizer.Model.Contact", "CurrentContact")
                         .WithMany("Pets")
-                        .HasForeignKey("CurrentShelterId")
+                        .HasForeignKey("CurrentContactId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -146,7 +146,7 @@ namespace AnimalRecognizer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CurrentShelter");
+                    b.Navigation("CurrentContact");
 
                     b.Navigation("Image");
                 });
@@ -156,7 +156,7 @@ namespace AnimalRecognizer.Migrations
                     b.Navigation("Pet");
                 });
 
-            modelBuilder.Entity("AnimalRecognizer.Model.Shelter", b =>
+            modelBuilder.Entity("AnimalRecognizer.Model.Contact", b =>
                 {
                     b.Navigation("Pets");
                 });

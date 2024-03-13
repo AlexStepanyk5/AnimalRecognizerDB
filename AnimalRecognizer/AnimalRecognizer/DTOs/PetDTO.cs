@@ -16,7 +16,7 @@ namespace AnimalRecognizer.DTOs
         public bool Sterilized { get; set; }
         public bool Passport { get; set; }
         public ImageDTO Image { get; set; }
-        public ShelterDTO CurrentShelter { get; set; }
+        public ContactDTO CurrentContact { get; set; }
 
     }
 }

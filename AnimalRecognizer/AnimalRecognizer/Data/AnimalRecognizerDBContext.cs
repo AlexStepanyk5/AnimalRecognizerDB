@@ -12,7 +12,7 @@ namespace AnimalRecognizer.Data
         }
 
         public DbSet<Pet> Pets { get; set; }
-        public DbSet<Shelter> Shelters { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
         public DbSet<Image> Images { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -53,14 +53,14 @@ namespace AnimalRecognizer.Data
                 .WithOne()
                 .IsRequired();
 
-                entity.HasOne(p => p.CurrentShelter)
+                entity.HasOne(p => p.CurrentContact)
                 .WithMany(p => p.Pets)
-                .HasForeignKey(p => p.CurrentShelterId)
+                .HasForeignKey(p => p.CurrentContactId)
                 .IsRequired();
 
             });
 
-            modelBuilder.Entity<Shelter>(entity =>
+            modelBuilder.Entity<Contact>(entity =>
             {
                 entity.HasKey(s => s.Id);
 
@@ -79,9 +79,6 @@ namespace AnimalRecognizer.Data
                 .HasMaxLength(150)
                 .IsUnicode(false);
 
-                entity.Property(s => s.QuantityOfPets)
-                .HasColumnType("int")
-                .HasMaxLength(12);
             });
 
             modelBuilder.Entity<Image>(entity =>
@@ -93,11 +90,6 @@ namespace AnimalRecognizer.Data
                .HasMaxLength(150)
                .IsUnicode(false)
                .IsRequired();
-
-                entity.Property(i => i.Alt)
-               .HasColumnType("varchar")
-               .HasMaxLength(150)
-               .IsUnicode(false);
 
             });
 

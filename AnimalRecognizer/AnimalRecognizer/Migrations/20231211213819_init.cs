@@ -25,7 +25,7 @@ namespace AnimalRecognizer.Migrations.AnimalRecognizerDB
                 });
 
             migrationBuilder.CreateTable(
-                name: "Shelters",
+                name: "Contacts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -66,7 +66,7 @@ namespace AnimalRecognizer.Migrations.AnimalRecognizerDB
                     table.ForeignKey(
                         name: "FK_Pets_Shelters_CurrentShelterId",
                         column: x => x.CurrentShelterId,
-                        principalTable: "Shelters",
+                        principalTable: "Contacts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -74,7 +74,7 @@ namespace AnimalRecognizer.Migrations.AnimalRecognizerDB
             migrationBuilder.CreateIndex(
                 name: "IX_Pets_CurrentShelterId",
                 table: "Pets",
-                column: "CurrentShelterId");
+                column: "CurrentContactId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pets_ImageId",
@@ -93,7 +93,7 @@ namespace AnimalRecognizer.Migrations.AnimalRecognizerDB
                 name: "Images");
 
             migrationBuilder.DropTable(
-                name: "Shelters");
+                name: "Contacts");
         }
     }
 }

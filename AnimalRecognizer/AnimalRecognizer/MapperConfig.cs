@@ -9,7 +9,7 @@ namespace AnimalRecognizer
         public MapperConfig()
         {
             CreateMap<Pet, PetDTO>();
-            CreateMap<Shelter, ShelterDTO>();
+            CreateMap<Contact, ContactDTO>();
             CreateMap<Image, ImageDTO>();
         }
     }
