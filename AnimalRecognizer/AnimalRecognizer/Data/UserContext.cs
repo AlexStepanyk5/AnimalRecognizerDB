@@ -18,6 +18,11 @@ namespace AnimalRecognizer.Data
             {
                 entity.HasKey(p => p.Id);
 
+                entity.Property(n => n.Name)
+                .HasColumnType("varchar")
+                .HasMaxLength(150)
+                .IsUnicode(false);
+
                 entity.Property(c => c.Type)
                 .HasConversion<string>()
                 .HasMaxLength(150)
@@ -27,6 +32,8 @@ namespace AnimalRecognizer.Data
                 .HasColumnType("varchar")
                 .HasMaxLength(150)
                 .IsUnicode(false);
+
+
 
             });         
             base.OnModelCreating(modelBuilder);

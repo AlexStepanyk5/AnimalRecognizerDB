@@ -32,7 +32,7 @@ namespace AnimalRecognizer.Controllers
                 {
                     await Authenticate(user);
 
-                    return Ok(new { message = "Successful login" });
+                    return Ok(new { message = "Successful login", name = user.Name });
                 }
                 else
                 {
@@ -50,6 +50,7 @@ namespace AnimalRecognizer.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new Claim("Name", user.Name)
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, null);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
