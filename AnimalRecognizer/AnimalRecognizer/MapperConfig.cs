@@ -11,6 +11,7 @@ namespace AnimalRecognizer
             CreateMap<Pet, PetDTO>();
             CreateMap<Contact, ContactDTO>();
             CreateMap<Image, ImageDTO>();
+            CreateMap<User, UserDTO>();
         }
     }
 }

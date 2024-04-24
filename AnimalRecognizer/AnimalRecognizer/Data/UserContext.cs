@@ -23,17 +23,21 @@ namespace AnimalRecognizer.Data
                 .HasMaxLength(150)
                 .IsUnicode(false);
 
-                entity.Property(c => c.Type)
-                .HasConversion<string>()
+                entity.Property(n => n.Email)
+                .HasColumnType("nvarchar")
                 .HasMaxLength(150)
                 .IsUnicode(false);
+
 
                 entity.Property(s => s.Password)
                 .HasColumnType("varchar")
                 .HasMaxLength(150)
                 .IsUnicode(false);
 
-
+                entity.Property(c => c.Type)
+                .HasConversion<string>()
+                .HasMaxLength(150)
+                .IsUnicode(false);
 
             });         
             base.OnModelCreating(modelBuilder);
